@@ -1,0 +1,22 @@
+---
+
+  - name: "Coded-institute: Apache multi-domain"
+    become: true
+    gather_facts: no
+    hosts: localhost
+    connection: local
+    vars_files:
+      - vars/sites.yml
+
+    tasks:
+      - name: Install Apache
+        apt: name=apache2 update_cache=yes state=latest
+
+      - name: Create Apache vhost
+        include_tasks: tasks/create-vhost.yml
+        with_items: "{{ http_host }}"
+
+      - name: Restart Apache
+        service:
+          name: apache2
+          state: restarted

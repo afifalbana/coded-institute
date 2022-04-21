@@ -1,0 +1,8 @@
+---
+app_user: "baibah"
+
+http_host: 
+  - siomy1.local
+  - siomy2.local
+
+http_port: "80"
